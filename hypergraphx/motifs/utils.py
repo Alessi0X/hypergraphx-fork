@@ -314,6 +314,20 @@ def norm_vector(a):
 
 
 def avg(motifs):
+    """
+    Compute the average motif frequencies across multiple models.
+
+    Parameters
+    ----------
+    motifs : list of list of tuples
+        Motif data from multiple models. Each model is a list of tuples where
+        each tuple is (motif_id, frequency).
+
+    Returns
+    -------
+    list of float
+        Average frequency for each motif position across all models.
+    """
     result = []
     for i in range(len(motifs[0])):
         s = 0
@@ -325,6 +339,20 @@ def avg(motifs):
 
 
 def sigma(motifs):
+    """
+    Compute the standard deviation of motif frequencies across multiple models.
+
+    Parameters
+    ----------
+    motifs : list of list of tuples
+        Motif data from multiple models. Each model is a list of tuples where
+        each tuple is (motif_id, frequency).
+
+    Returns
+    -------
+    list of float
+        Standard deviation of frequency for each motif position across all models.
+    """
     u = avg(motifs)
 
     result = []
