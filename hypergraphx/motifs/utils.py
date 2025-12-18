@@ -72,7 +72,7 @@ def _motifs_ho_not_full(edges, N, visited):
 
         out.append((motif, count))
 
-    out = list(sorted(out))
+    out = sorted(out)
 
     D = {}
     for i in range(len(out)):
@@ -181,7 +181,7 @@ def _motifs_standard(edges, N, visited):
 
         out.append((motif, count))
 
-    out = list(sorted(out))
+    out = sorted(out)
 
     D = {}
     for i in range(len(out)):
@@ -246,7 +246,7 @@ def _motifs_ho_full(edges, N):
 
         out.append((motif, count))
 
-    out = list(sorted(out))
+    out = sorted(out)
 
     D = {}
     for i in range(len(out)):
@@ -586,13 +586,13 @@ def _directed_motifs_ho_full(edges, N):
             labeled_motif.append(new_e)
         labeled_motif = tuple(sorted(labeled_motif))
 
-        vettore = list(range(1, N + 1))
-        permutazioni_vettore = permutations(vettore)
+        vector = list(range(1, N + 1))
+        permutations_vector = permutations(vector)
         m = {}
         l_perm = []
-        for permutazione in permutazioni_vettore:
+        for permutation in permutations_vector:
             i = 1
-            for x in permutazione:
+            for x in permutation:
                 m[i] = x
                 i += 1
 
@@ -631,7 +631,7 @@ def _directed_motifs_ho_full(edges, N):
     for motif, count in mapping.items():
         out.append((motif, count))
 
-    out = list(sorted(out))
+    out = sorted(out)
 
     D = {}
     for i in range(len(out)):
@@ -686,12 +686,12 @@ def _directed_motifs_ho_not_full(edges, N, visited):
         labeled_motif = tuple(sorted(labeled_motif))
 
         l_perm = []
-        vettore = list(range(1, N + 1))
-        permutazioni_vettore = permutations(vettore)
+        vector = list(range(1, N + 1))
+        permutations_vector = permutations(vector)
         m = {}
-        for permutazione in permutazioni_vettore:
+        for permutation in permutations_vector:
             i = 1
-            for x in permutazione:
+            for x in permutation:
                 m[i] = x
                 i += 1
 
@@ -743,7 +743,7 @@ def _directed_motifs_ho_not_full(edges, N, visited):
     for motif, count in mapping.items():
         out.append((motif, count))
 
-    out = list(sorted(out))
+    out = sorted(out)
 
     D = {}
     for i in range(len(out)):
@@ -752,7 +752,7 @@ def _directed_motifs_ho_not_full(edges, N, visited):
     return out, visited
 
 
-def _all_directed_hyperedges(nodi):
+def _all_directed_hyperedges(nodes):
     """
     Compute all directed hyperedges
 
@@ -766,22 +766,21 @@ def _all_directed_hyperedges(nodi):
     list
         Power set of the set
     """
-    iperarchi = set()
+    hyperedges = set()
 
     # Genera iperarchi con nodi di partenza e di arrivo
-    for lunghezza_partenza in range(1, len(nodi)):
-        for nodi_partenza in combinations(nodi, lunghezza_partenza):
-            for lunghezza_arrivo in range(1, len(nodi) - lunghezza_partenza + 1):
-                for nodi_arrivo in combinations(
-                    set(nodi) - set(nodi_partenza), lunghezza_arrivo
+    for start_length in range(1, len(nodes)):
+        for start_nodes in combinations(nodes, start_length):
+            for end_length in range(1, len(nodes) - start_length + 1):
+                for end_nodes in combinations(
+                    set(nodes) - set(start_nodes), end_length
                 ):
-                    iperarco = (
-                        tuple(sorted(nodi_partenza)),
-                        tuple(sorted(nodi_arrivo)),
+                    hyperedge = (
+                        tuple(sorted(start_nodes)),
+                        tuple(sorted(end_nodes)),
                     )
-                    iperarchi.add(iperarco)
-
-    return iperarchi
+                    hyperedges.add(hyperedge)
+    return hyperedges
 
 
 def directed_diff_sum(observed: list, null_models: list):
