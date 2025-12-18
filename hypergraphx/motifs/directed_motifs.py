@@ -92,13 +92,12 @@ def compute_directed_motifs(
             raise ValueError(
                 "Exact computation of motifs of order > 5 is not available."
             )
-
         results.append(m1)
 
     output["config_model"] = results
 
-    delta = list(directed_diff_sum(output["observed"], output["config_model"]))
-    norm_delta = list(norm_vector(delta))
+    delta = directed_diff_sum(output["observed"], output["config_model"])
+    norm_delta = norm_vector(delta)
     output["norm_delta"] = []
 
     for i in range(len(delta)):

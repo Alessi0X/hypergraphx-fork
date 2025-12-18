@@ -78,6 +78,7 @@ def compute_motifs(hypergraph: Hypergraph, order=3, runs_config_model=10):
             "Computing config model motifs of order {}. Step: {}".format(order, i + 1)
         )
         e1 = configuration_model(hypergraph, label="stub", n_steps=STEPS)
+
         if order == 3:
             m1 = _motifs_order_3(e1.get_edges())
         elif order == 4:
@@ -90,8 +91,8 @@ def compute_motifs(hypergraph: Hypergraph, order=3, runs_config_model=10):
 
     output["config_model"] = results
 
-    delta = list(diff_sum(output["observed"], output["config_model"]))
-    norm_delta = list(norm_vector(delta))
+    delta = diff_sum(output["observed"], output["config_model"])
+    norm_delta = norm_vector(delta)
     output["norm_delta"] = []
 
     for i in range(len(delta)):
